@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1705.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gazi-BMT-308-Final", "Gazi-BMT-308-Final\Gazi-BMT-308-Final.csproj", "{88D543E9-DD8C-4D08-A617-02AFB53FFD6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88D543E9-DD8C-4D08-A617-02AFB53FFD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D543E9-DD8C-4D08-A617-02AFB53FFD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D543E9-DD8C-4D08-A617-02AFB53FFD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D543E9-DD8C-4D08-A617-02AFB53FFD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C55F4DD-0071-421F-9DCC-286A81CA2F8F}
+	EndGlobalSection
+EndGlobal
