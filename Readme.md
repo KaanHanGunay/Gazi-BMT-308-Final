@@ -12,5 +12,12 @@ docker run --name postgres -e POSTGRES_USER=khg -e POSTGRES_PASSWORD=khg -p 5432
 
 ```sh
 dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
 
+<p>Veritabanı migration yapmak için;</p>
+
+```sh
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
