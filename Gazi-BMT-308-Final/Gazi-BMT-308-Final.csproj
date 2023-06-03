@@ -22,11 +22,13 @@
     <None Remove="RestControllers\" />
     <None Remove="Views\Books\" />
     <None Remove="Views\Account\" />
+    <None Remove="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="RestControllers\" />
     <Folder Include="Views\Books\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

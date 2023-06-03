@@ -1,6 +1,6 @@
-﻿@model Gazi_BMT_308_Final.ViewModels.LoginViewModel
+﻿@model Gazi_BMT_308_Final.ViewModels.ManageViewModel
 
-<h2>Login</h2>
+<h2>Manage Account</h2>
 
 <form method="post">
     <div class="form-group">
@@ -11,5 +11,9 @@
         <label for="Password">Password</label>
         <input type="password" class="form-control" id="Password" asp-for="Password" required />
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <div class="form-group">
+        <label for="ConfirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="ConfirmPassword" asp-for="ConfirmPassword" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
