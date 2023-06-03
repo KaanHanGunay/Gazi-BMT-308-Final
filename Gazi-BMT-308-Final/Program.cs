@@ -1,4 +1,7 @@
-﻿using Gazi_BMT_308_Final.Services;
+﻿using Gazi_BMT_308_Final;
+using Gazi_BMT_308_Final.Models;
+using Gazi_BMT_308_Final.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +18,10 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+var userManager = app.Services.GetRequiredService<UserManager<User>>();
+var roleManager = app.Services.GetRequiredService<RoleManager<ApplicationRole>>();
+UserAndRoleDataInitializer.SeedData(userManager, roleManager).Wait();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -28,6 +35,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

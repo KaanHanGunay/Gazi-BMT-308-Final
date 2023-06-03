@@ -21,3 +21,10 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
+
+<p>Yetkilendirme yapmak amacıyla Identity paketi eklenmiştir.</p>
+
+```sh
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+```
+
