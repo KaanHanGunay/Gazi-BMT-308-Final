@@ -20,9 +20,13 @@
   <ItemGroup>
     <None Remove="Services\" />
     <None Remove="RestControllers\" />
+    <None Remove="Views\Books\" />
+    <None Remove="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="RestControllers\" />
+    <Folder Include="Views\Books\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
 </Project>

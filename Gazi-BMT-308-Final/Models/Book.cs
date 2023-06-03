@@ -9,7 +9,7 @@ namespace Gazi_BMT_308_Final.Models
         public int PublicationYear { get; set; }
 
         // Navigation property
-        public ICollection<UserBook> UserBooks { get; set; }
+        public ICollection<UserBook>? UserBooks { get; set; }
     }
 }
 
