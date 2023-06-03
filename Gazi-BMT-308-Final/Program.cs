@@ -6,20 +6,27 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<User, ApplicationRole>() // Identity servislerini ekle.
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<BookService>();
 builder.Services.AddScoped<UserService>();
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
-var userManager = app.Services.GetRequiredService<UserManager<User>>();
-var roleManager = app.Services.GetRequiredService<RoleManager<ApplicationRole>>();
+// Ensure the database is created.
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+dbContext.Database.EnsureCreated();
+
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 UserAndRoleDataInitializer.SeedData(userManager, roleManager).Wait();
 
 // Configure the HTTP request pipeline.
@@ -43,4 +50,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
