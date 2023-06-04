@@ -14,4 +14,3 @@ namespace Gazi_BMT_308_Final.Models
         public ICollection<UserBook>? UserBooks { get; set; }
     }
 }
-

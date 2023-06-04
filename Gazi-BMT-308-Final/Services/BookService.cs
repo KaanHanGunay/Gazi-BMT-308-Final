@@ -92,6 +92,22 @@ namespace Gazi_BMT_308_Final.Services
                 .ToListAsync();
         }
 
+        public async Task CreateReadingStatistic(int userId, int bookId)
+        {
+            var statistic = new ReadingStatistics
+            {
+                UserId = userId,
+                BookId = bookId,
+                BorrowDate = _context.UserBooks
+                                     .Where(ub => ub.BookId == bookId && ub.UserId == userId)
+                                     .Select(ub => ub.BorrowDate)
+                                     .FirstOrDefault()
+            };
+
+            _context.ReadingStatistics.Add(statistic);
+            await _context.SaveChangesAsync();
+        }
+
     }
 
 }

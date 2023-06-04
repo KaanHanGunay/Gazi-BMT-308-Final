@@ -54,13 +54,6 @@ namespace Gazi_BMT_308_Final.Controllers
                 var errors = ModelState.SelectMany(x => x.Value.Errors)
                                        .Select(x => x.ErrorMessage)
                                        .ToList();
-
-                // errors listesi şimdi ModelState hatalarını içeriyor.
-                // Her bir hatayı aşağıdaki gibi konsola yazdırabilirsiniz:
-                foreach (var error in errors)
-                {
-                    Console.WriteLine(error);
-                }
             }
 
 
@@ -135,6 +128,7 @@ namespace Gazi_BMT_308_Final.Controllers
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            await _bookService.CreateReadingStatistic(userId, id);
             await _bookService.ReturnBook(id, userId);
 
             return RedirectToAction(nameof(Index));
