@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Gazi_BMT_308_Final.Models;
 using Microsoft.AspNetCore.Authorization;
+using Gazi_BMT_308_Final.Services;
 
 namespace Gazi_BMT_308_Final.Controllers;
 
@@ -9,15 +10,18 @@ namespace Gazi_BMT_308_Final.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly BookService _bookService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, BookService bookService)
     {
         _logger = logger;
+        _bookService = bookService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var latestBooks = await _bookService.GetLatestBooks();
+        return View(latestBooks);
     }
 
     public IActionResult Privacy()

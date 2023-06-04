@@ -84,6 +84,14 @@ namespace Gazi_BMT_308_Final.Services
             }
         }
 
+        public async Task<List<Book>> GetLatestBooks()
+        {
+            return await _context.Books
+                .OrderByDescending(b => b.DateAdded)
+                .Take(20)
+                .ToListAsync();
+        }
+
     }
 
 }
