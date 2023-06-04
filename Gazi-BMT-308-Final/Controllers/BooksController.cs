@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Gazi_BMT_308_Final.Models;
 using Gazi_BMT_308_Final.Services;
+using Gazi_BMT_308_Final.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,11 +25,19 @@ namespace Gazi_BMT_308_Final.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var books = !string.IsNullOrWhiteSpace(searchString)
                 ? await _bookService.SearchBooks(searchString)
                 : await _bookService.GetAllBooks();
 
-            return View(books);
+            var viewModel = books.Select(b => new BookViewModel
+            {
+                Book = b,
+                IsBorrowed = _bookService.IsBookBorrowedByUser(b.Id, userId).Result
+            }).ToList();
+
+
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -110,6 +120,23 @@ namespace Gazi_BMT_308_Final.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _bookService.DeleteBook(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> BorrowBook(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await _bookService.BorrowBook(id, int.Parse(userId));
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ReturnBook(int id)
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            await _bookService.ReturnBook(id, userId);
+
             return RedirectToAction(nameof(Index));
         }
 

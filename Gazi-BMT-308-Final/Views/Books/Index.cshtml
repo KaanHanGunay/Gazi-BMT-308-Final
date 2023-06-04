@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gazi_BMT_308_Final.Models.Book>
+﻿@model IEnumerable<Gazi_BMT_308_Final.ViewModels.BookViewModel>
 
 <h2>Kitaplar</h2>
 
@@ -20,21 +20,27 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var book in Model)
+        @foreach (var bookViewModel in Model)
         {
             <tr>
-                <td>@book.Id</td>
-                <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>@book.PublicationYear</td>
+                <td>@bookViewModel.Book.Id</td>
+                <td>@bookViewModel.Book.Title</td>
+                <td>@bookViewModel.Book.Author</td>
+                <td>@bookViewModel.Book.PublicationYear</td>
                 <td>
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="Edit" asp-controller="Books" asp-route-id="@book.Id" class="btn btn-warning">Düzenle</a>
-                        <a asp-action="Delete" asp-controller="Books" asp-route-id="@book.Id" class="btn btn-danger">Sil</a>
+                        <a asp-action="Edit" asp-controller="Books" asp-route-id="@bookViewModel.Book.Id" class="btn btn-warning">Düzenle</a>
+                        <a asp-action="Delete" asp-controller="Books" asp-route-id="@bookViewModel.Book.Id" class="btn btn-danger">Sil</a>
                     }
-                    <button class="btn btn-primary">Ödünç Al</button>
-                    <button class="btn btn-info">İade Et</button>
+                    @if (!bookViewModel.IsBorrowed)
+                    {
+                        <a asp-action="BorrowBook" asp-controller="Books" asp-route-id="@bookViewModel.Book.Id" class="btn btn-primary">Ödünç Al</a>
+                    }
+                    else
+                    {
+                        <a asp-action="ReturnBook" asp-controller="Books" asp-route-id="@bookViewModel.Book.Id" class="btn btn-info">İade Et</a>
+                    }
                 </td>
             </tr>
         }

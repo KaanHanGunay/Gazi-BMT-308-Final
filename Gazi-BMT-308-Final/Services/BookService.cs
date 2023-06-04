@@ -57,6 +57,33 @@ namespace Gazi_BMT_308_Final.Services
                 .ToListAsync();
         }
 
+        public async Task<UserBook> BorrowBook(int bookId, int userId)
+        {
+            var userBook = new UserBook { BookId = bookId, UserId = userId };
+            _context.UserBooks.Add(userBook);
+            await _context.SaveChangesAsync();
+
+            return userBook;
+        }
+
+        public async Task<bool> IsBookBorrowedByUser(int bookId, int userId)
+        {
+            return await _context.UserBooks
+                .AnyAsync(ub => ub.BookId == bookId && ub.UserId == userId);
+        }
+
+        public async Task ReturnBook(int bookId, int userId)
+        {
+            var userBook = await _context.UserBooks
+                .SingleOrDefaultAsync(ub => ub.BookId == bookId && ub.UserId == userId);
+
+            if (userBook != null)
+            {
+                _context.UserBooks.Remove(userBook);
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 
 }
