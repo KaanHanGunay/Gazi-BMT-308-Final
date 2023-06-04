@@ -19,9 +19,12 @@ namespace Gazi_BMT_308_Final.Controllers
             _bookService = bookService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var books = await _bookService.GetAllBooks();
+            var books = !string.IsNullOrWhiteSpace(searchString)
+                ? await _bookService.SearchBooks(searchString)
+                : await _bookService.GetAllBooks();
+
             return View(books);
         }
 

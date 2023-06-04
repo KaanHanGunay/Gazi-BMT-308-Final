@@ -46,6 +46,17 @@ namespace Gazi_BMT_308_Final.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Book>> SearchBooks(string searchString)
+        {
+            var lowerCaseSearchString = searchString.ToLower();
+
+            return await _context.Books
+                .Where(b => b.Title.ToLower().Contains(lowerCaseSearchString)
+                            || b.Author.ToLower().Contains(lowerCaseSearchString))
+                .ToListAsync();
+        }
+
     }
 
 }
