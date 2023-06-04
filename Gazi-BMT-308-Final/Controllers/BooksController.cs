@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gazi_BMT_308_Final.Models;
 using Gazi_BMT_308_Final.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Gazi_BMT_308_Final.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly BookService _bookService;

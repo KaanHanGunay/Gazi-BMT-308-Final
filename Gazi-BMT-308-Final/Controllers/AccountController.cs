@@ -1,5 +1,6 @@
 ﻿using Gazi_BMT_308_Final.Models;
 using Gazi_BMT_308_Final.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -38,12 +39,14 @@ namespace Gazi_BMT_308_Final.Controllers
             }
         }
 
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public async Task<IActionResult> AccountManage()
         {
             var user = await _userManager.GetUserAsync(User);
