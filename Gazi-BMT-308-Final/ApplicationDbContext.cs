@@ -14,7 +14,11 @@ public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, int
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder); 
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Book>()
+            .Property(b => b.DateAdded)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         modelBuilder.Entity<UserBook>()
             .HasKey(ub => new { ub.UserId, ub.BookId });

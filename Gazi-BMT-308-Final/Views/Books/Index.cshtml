@@ -5,9 +5,16 @@
 <form asp-controller="Books" asp-action="Index" method="get">
     <div class="form-group">
         <input type="text" class="form-control" id="SearchString" name="SearchString" placeholder="Kitap veya Yazar adı ile ara">
-        <button type="submit" class="btn btn-primary">Ara</button>
+        <button type="submit" class="btn btn-primary pt-1">Ara</button>
     </div>
 </form>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="d-flex justify-content-end">
+        <a asp-action="Create" asp-controller="Books" class="btn btn-success">Kitap Ekle</a>
+    </div>
+}
 
 <table class="table">
     <thead>
