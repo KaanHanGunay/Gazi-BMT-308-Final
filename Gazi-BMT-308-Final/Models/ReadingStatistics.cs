@@ -8,8 +8,6 @@ namespace Gazi_BMT_308_Final.Models
         public int BookId { get; set; }
         public DateTime BorrowDate { get; set; }
         public DateTime ReturnDate { get; set; }
-
-        // Navigation properties
         public User User { get; set; }
         public Book Book { get; set; }
     }

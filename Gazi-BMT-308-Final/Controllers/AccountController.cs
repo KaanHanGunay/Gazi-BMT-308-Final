@@ -34,7 +34,7 @@ namespace Gazi_BMT_308_Final.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Invalid login attempt.");
+                ModelState.AddModelError("", "Hatalı giriş denemesi");
                 return View();
             }
         }
@@ -52,7 +52,7 @@ namespace Gazi_BMT_308_Final.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Verilen ID bilgisine sahip kullanıcı bulunamadı: '{_userManager.GetUserId(User)}'.");
             }
             ManageViewModel model = new ManageViewModel();
             model.Username = user.UserName;

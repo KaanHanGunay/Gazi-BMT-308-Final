@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-4">
         <h2 class="display-6">En Son Eklenen Kitaplar</h2>
-        <div id="loadingBar">Loading...</div>
+        <div id="loadingBar">Yükleniyor...</div>
         <ul id="bookList" style="display: none;">
             @if (Model.LatestBooks.Any())
             {
@@ -31,7 +31,7 @@
     </div>
     <div class="col-4">
         <h2 class="display-6">En Çok Okunan Kitaplar</h2>
-        <div id="loadingBarMostReadBooks">Loading...</div>
+        <div id="loadingBarMostReadBooks">Yükleniyot...</div>
         <ul id="mostReadBookList" style="display: none;">
             @if (Model.MostReadBooks.Any())
             {
@@ -55,7 +55,7 @@
     </div>
     <div class="col-4">
         <h2 class="display-6">En Çok Okuyan Kullanıcılar</h2>
-        <div id="loadingBarUsers">Loading...</div>
+        <div id="loadingBarUsers">Yükleniyor...</div>
         <ul id="mostReadingUserList" style="display: none;">
             @if (Model.MostReadingUsers.Any())
             {

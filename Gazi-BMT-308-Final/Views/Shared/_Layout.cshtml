@@ -29,6 +29,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Hakkımızda</a>
                         </li>
                     </ul>
+                    <form class="d-flex my-2 my-lg-0" action="/Books">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Kitap ara" aria-label="Search" name="SearchString">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
+                    </form>
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
                         {

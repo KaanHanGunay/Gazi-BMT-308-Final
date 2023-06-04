@@ -1,19 +1,19 @@
 ﻿@model Gazi_BMT_308_Final.Models.Book
 
-<h2>Delete</h2>
+<h2>Kitap Silme</h2>
 
-<p>Are you sure you want to delete this?</p>
+<p>Bu kitabı silmek istediğinize emin misiniz?</p>
 
 <form asp-action="DeleteConfirmed">
     <input type="hidden" asp-for="Id" />
     <p>
-        <strong>Title:</strong> @Model.Title
+        <strong>Başlık:</strong> @Model.Title
     </p>
     <p>
-        <strong>Author:</strong> @Model.Author
+        <strong>Yazar:</strong> @Model.Author
     </p>
     <p>
-        <strong>Publication Year:</strong> @Model.PublicationYear
+        <strong>Yayım Yılı:</strong> @Model.PublicationYear
     </p>
-    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="submit" class="btn btn-danger">Sil</button>
 </form>
