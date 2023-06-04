@@ -7,6 +7,7 @@ namespace Gazi_BMT_308_Final.Models
         public string Title { get; set; }
         public string Author { get; set; }
         public int PublicationYear { get; set; }
+        public string? Cover { get; set; }
 
         // Navigation property
         public ICollection<UserBook>? UserBooks { get; set; }

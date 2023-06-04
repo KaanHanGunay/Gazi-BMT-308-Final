@@ -35,7 +35,7 @@ namespace Gazi_BMT_308_Final.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Author,PublicationYear")] Book book)
+        public async Task<IActionResult> Create([Bind("Title,Author,PublicationYear,Cover")] Book book)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Gazi_BMT_308_Final.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,PublicationYear")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,PublicationYear,Cover")] Book book)
         {
             if (id != book.Id)
             {
