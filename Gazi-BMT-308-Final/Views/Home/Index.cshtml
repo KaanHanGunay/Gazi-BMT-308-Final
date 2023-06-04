@@ -1,4 +1,4 @@
-﻿@model List<Gazi_BMT_308_Final.Models.Book>
+﻿@model Gazi_BMT_308_Final.ViewModels.HomeIndexViewModel
 
 @{
     ViewData["Title"] = "Ana Sayfa";
@@ -9,9 +9,9 @@
         <h2 class="display-6">En Son Eklenen Kitaplar</h2>
         <div id="loadingBar">Loading...</div>
         <ul id="bookList" style="display: none;">
-            @if (Model.Any())
+            @if (Model.LatestBooks.Any())
             {
-                foreach (var book in Model)
+                foreach (var book in Model.LatestBooks)
                 {
                     <li style="display: flex; align-items: center;">
                         <img src="@(!string.IsNullOrEmpty(book.Cover) ? book.Cover : "https://images-eu.ssl-images-amazon.com/images/I/71R4ZKbuZ5L._AC_SS350_.jpg")" style="height: 100px; width: 50px; margin-right: 10px;">
@@ -29,12 +29,64 @@
             }
         </ul>
     </div>
+    <div class="col-4">
+        <h2 class="display-6">En Çok Okunan Kitaplar</h2>
+        <div id="loadingBarMostReadBooks">Loading...</div>
+        <ul id="mostReadBookList" style="display: none;">
+            @if (Model.MostReadBooks.Any())
+            {
+                foreach (var book in Model.MostReadBooks)
+                {
+                    <li style="display: flex; align-items: center;">
+                        <img src="@(!string.IsNullOrEmpty(book.Cover) ? book.Cover : "https://images-eu.ssl-images-amazon.com/images/I/71R4ZKbuZ5L._AC_SS350_.jpg")" style="height: 100px; width: 50px; margin-right: 10px;">
+                        <div class="m-1">
+                            <p><strong>@book.Title</strong></p>
+                            <p>Yazar: @book.Author</p>
+                            <p>Yayım Yılı: @book.PublicationYear</p>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li>İstatistik Bulunamadı.</li>
+            }
+        </ul>
+    </div>
+    <div class="col-4">
+        <h2 class="display-6">En Çok Okuyan Kullanıcılar</h2>
+        <div id="loadingBarUsers">Loading...</div>
+        <ul id="mostReadingUserList" style="display: none;">
+            @if (Model.MostReadingUsers.Any())
+            {
+                int counter = 1;
+                foreach (var user in Model.MostReadingUsers)
+                {
+                    <li style="display: flex; align-items: center;">
+                        <div class="m-1">
+                            <p><strong>@counter. @user.UserName</strong></p>
+                        </div>
+                    </li>
+                    counter++;
+                }
+            }
+            else
+            {
+                <li>İstatistik Bulunamadı.</li>
+            }
+        </ul>
+
+    </div>
 </div>
 
 @section Scripts
 {
     <script>$(document).ready(function () {
             $('#loadingBar').hide();
-            $('#bookList').show();
+            $('#bookList').show(); 
+            $('#loadingBarMostReadBooks').hide();
+            $('#mostReadBookList').show();
+            $('#loadingBarUsers').hide();
+            $('#mostReadingUserList').show();
         });</script>
 }

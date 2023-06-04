@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Gazi_BMT_308_Final.Models;
 using Microsoft.AspNetCore.Authorization;
 using Gazi_BMT_308_Final.Services;
+using Gazi_BMT_308_Final.ViewModels;
 
 namespace Gazi_BMT_308_Final.Controllers;
 
@@ -21,8 +22,17 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var latestBooks = await _bookService.GetLatestBooks();
-        return View(latestBooks);
+        var mostReadBooks = await _bookService.GetMostReadBooks();
+        var mostReadingUsers = await _bookService.GetMostReadingUsers();
+        var model = new HomeIndexViewModel
+        {
+            LatestBooks = latestBooks,
+            MostReadBooks = mostReadBooks,
+            MostReadingUsers = mostReadingUsers
+        };
+        return View(model);
     }
+
 
     public IActionResult Privacy()
     {
@@ -42,5 +52,6 @@ public class HomeController : Controller
         ViewBag.Email = "kaanh.gunay@gmail.com";
         return View();
     }
+
 }
 

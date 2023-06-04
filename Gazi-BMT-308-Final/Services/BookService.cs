@@ -108,6 +108,28 @@ namespace Gazi_BMT_308_Final.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Book>> GetMostReadBooks()
+        {
+            return await _context.ReadingStatistics
+                .GroupBy(rs => rs.BookId)
+                .OrderByDescending(g => g.Count())
+                .Take(20)
+                .Select(g => g.Key)
+                .Join(_context.Books, bookId => bookId, book => book.Id, (bookId, book) => book)
+                .ToListAsync();
+        }
+
+        public async Task<List<User>> GetMostReadingUsers()
+        {
+            return await _context.ReadingStatistics
+                .GroupBy(rs => rs.UserId)
+                .OrderByDescending(g => g.Count())
+                .Take(20)
+                .Select(g => g.Key)
+                .Join(_context.Users, userId => userId, user => user.Id, (userId, user) => user)
+                .ToListAsync();
+        }
+
     }
 
 }
